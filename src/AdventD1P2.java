@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 
-public class Advent2 {
+public class AdventD1P2 {
     public static void main(String[] args){
         try{
             File source = new File("numberList.txt");
