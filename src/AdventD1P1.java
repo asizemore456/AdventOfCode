@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
 
 
 public class AdventD1P1 {
@@ -14,13 +15,7 @@ public class AdventD1P1 {
                 int value = scan.nextInt();
                 inputArrayL.add(value);
             }
-            for (int i = 0; i < inputArrayL.size(); i++) {
-                for (int j = 0; j < inputArrayL.size(); j++) {
-                    if (inputArrayL.get(i) + inputArrayL.get(j) == 2020) {
-                        System.out.println(inputArrayL.get(i) * inputArrayL.get(j));
-                    }
-                }
-            }
+            System.out.println(findAnswer(inputArrayL));
             scan.close();
         } catch (FileNotFoundException e) {
             System.out.println("Import a file, dummy");
@@ -30,6 +25,19 @@ public class AdventD1P1 {
     }
 
 
+    private static int findAnswer(ArrayList<Integer> inputArrayL) {
+        Collections.sort(inputArrayL);
+        int result = 0;
+        for (int i = 0; i < inputArrayL.size(); i++) {
+            for (int j = inputArrayL.size() - 1; j >= 0; j--) {
+                if (inputArrayL.get(i) + inputArrayL.get(j) == 2020) {
+                    result = inputArrayL.get(i) * inputArrayL.get(j);
+                    return result;
+                }
+            }
+        }
+        return -666;
+    }
 }
 
 
