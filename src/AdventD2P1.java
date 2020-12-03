@@ -27,7 +27,7 @@ public class AdventD2P1 {
                 tempString = scan.next();
                 password.add(tempString);
             }
-            System.out.println(getCorrectPasswords(lowerLim, upperLim,specialChar, password));
+            System.out.println(getCorrectPasswords(lowerLim, upperLim, specialChar, password));
         } catch (FileNotFoundException e) {
             System.out.println("Import a file, dummy");
             e.printStackTrace();
@@ -46,41 +46,19 @@ public class AdventD2P1 {
     }
 
 
-
-
-    public static int getCorrectPasswords(ArrayList<Integer> lowerLim, ArrayList<Integer> upperLim, ArrayList<Character> specialChar, ArrayList<String> password){
+    public static int getCorrectPasswords(ArrayList<Integer> lowerLim, ArrayList<Integer> upperLim, ArrayList<Character> specialChar, ArrayList<String> password) {
         int correctPasswords = 0;
         int wrongPasswords = 0;
         for (int ij = 0; ij < password.size(); ij++) {
             if (countChar(password.get(ij), specialChar.get(ij)) > upperLim.get(ij)) {
                 wrongPasswords++;
-                System.out.println("Upper Lim Violation at index: " + ij + " " + password.get(ij));
-                System.out.println("Upper Lim Violation:" + lowerLim.get(ij));
-                System.out.println("Upper Lim Violation:" + upperLim.get(ij));
-                System.out.println("Upper Lim Violation:" + specialChar.get(ij));
             } else if (countChar(password.get(ij), specialChar.get(ij)) < lowerLim.get(ij)) {
                 wrongPasswords++;
-                System.out.println("Lower Lim Violation at index: " + ij + " " + password.get(ij));
-                System.out.println("Lower Lim Violation:" + lowerLim.get(ij));
-                System.out.println("Lower Lim Violation:" + upperLim.get(ij));
-                System.out.println("Lower Lim Violation:" + specialChar.get(ij));
             } else {
                 correctPasswords++;
             }
         }
         return correctPasswords;
     }
-    //Helper Methods
-    //public static void populate(){
-    //  while (scan.hasNext()) {
-    //    int value = scan.nextInt();
-    //  inputArrayL.add(value);
-    //}
-    //}
-
-    //public static void checkPasswords(){
-
-    //}
-
-
 }
+
