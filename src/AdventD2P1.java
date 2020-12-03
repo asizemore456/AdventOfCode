@@ -7,18 +7,18 @@ import java.util.regex.*;
 
 public class AdventD2P1 {
     //main method
-    public static void main(String[] args){
-        try{
-        int wrongPasswords = 0;
-        ArrayList<Integer> lowerLim = new ArrayList<>();
-        ArrayList<Integer> upperLim = new ArrayList<>();
-        ArrayList<Character> specialChar = new ArrayList<>();
-        ArrayList<String> password = new ArrayList<>();
-        File source = new File("inputDay2.txt");
-        Scanner scan = new Scanner(source);
-    //Step 1 - Input my Inputs, I think I should use 3 or 4 array lists for this
-    //LowerLim<>, UpperLim<>, SpecialChar<>, password<>
-    //This will become populate()
+    public static void main(String[] args) {
+        try {
+            int wrongPasswords = 0;
+            ArrayList<Integer> lowerLim = new ArrayList<>();
+            ArrayList<Integer> upperLim = new ArrayList<>();
+            ArrayList<Character> specialChar = new ArrayList<>();
+            ArrayList<String> password = new ArrayList<>();
+            File source = new File("inputDay2.txt");
+            Scanner scan = new Scanner(source);
+            //Step 1 - Input my Inputs, I think I should use 3 or 4 array lists for this
+            //LowerLim<>, UpperLim<>, SpecialChar<>, password<>
+            //This will become populate()
             while (scan.hasNext()) {
                 String tempString = scan.next();
                 String[] temp1 = tempString.split("-");
@@ -31,53 +31,51 @@ public class AdventD2P1 {
                 password.add(tempString);
             }
             int correctPasswords = 0;
-            for(int ij=0;ij<password.size();ij++){
-                if(countChar(password.get(ij), specialChar.get(ij))>upperLim.get(ij)){
-                   wrongPasswords++;
-                    System.out.println("Upper Lim Violation at index: "+ij+" "+password.get(ij));
-                    System.out.println("Upper Lim Violation:"+lowerLim.get(ij));
-                    System.out.println("Upper Lim Violation:"+upperLim.get(ij));
-                    System.out.println("Upper Lim Violation:"+specialChar.get(ij));
-                }
-                else if(countChar(password.get(ij), specialChar.get(ij))<lowerLim.get(ij)){
+            for (int ij = 0; ij < password.size(); ij++) {
+                if (countChar(password.get(ij), specialChar.get(ij)) > upperLim.get(ij)) {
                     wrongPasswords++;
-                    System.out.println("Lower Lim Violation at index: "+ij+" "+password.get(ij));
-                    System.out.println("Lower Lim Violation:"+lowerLim.get(ij));
-                    System.out.println("Lower Lim Violation:"+upperLim.get(ij));
-                    System.out.println("Lower Lim Violation:"+specialChar.get(ij));
-                }
-                else{
+                    System.out.println("Upper Lim Violation at index: " + ij + " " + password.get(ij));
+                    System.out.println("Upper Lim Violation:" + lowerLim.get(ij));
+                    System.out.println("Upper Lim Violation:" + upperLim.get(ij));
+                    System.out.println("Upper Lim Violation:" + specialChar.get(ij));
+                } else if (countChar(password.get(ij), specialChar.get(ij)) < lowerLim.get(ij)) {
+                    wrongPasswords++;
+                    System.out.println("Lower Lim Violation at index: " + ij + " " + password.get(ij));
+                    System.out.println("Lower Lim Violation:" + lowerLim.get(ij));
+                    System.out.println("Lower Lim Violation:" + upperLim.get(ij));
+                    System.out.println("Lower Lim Violation:" + specialChar.get(ij));
+                } else {
                     correctPasswords++;
                 }
             }
-    //Step 2 - Check all the passwords against their respective conditions
-    //Add to wrong password counter reach time a password fails
-    //This will become checkPasswords();
+            //Step 2 - Check all the passwords against their respective conditions
+            //Add to wrong password counter reach time a password fails
+            //This will become checkPasswords();
 
-    //Print Statements
-            System.out.println(wrongPasswords+" "+correctPasswords+" "+password.size());} catch(FileNotFoundException e) {
+            //Print Statements
+            System.out.println(wrongPasswords + " " + correctPasswords + " " + password.size());
+        } catch (FileNotFoundException e) {
             System.out.println("Import a file, dummy");
             e.printStackTrace();
         }
     }
 
-    public static int countChar(String str, char c)
-    {
+    public static int countChar(String str, char c) {
         int count = 0;
 
-        for(int ik=0; ik < str.length(); ik++)
-        {    if(str.charAt(ik) == c)
-            count++;
+        for (int ik = 0; ik < str.length(); ik++) {
+            if (str.charAt(ik) == c)
+                count++;
         }
 
         return count;
     }
     //Helper Methods
     //public static void populate(){
-      //  while (scan.hasNext()) {
-        //    int value = scan.nextInt();
-          //  inputArrayL.add(value);
-        //}
+    //  while (scan.hasNext()) {
+    //    int value = scan.nextInt();
+    //  inputArrayL.add(value);
+    //}
     //}
 
     //public static void checkPasswords(){
