@@ -2,8 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.util.regex.*;
 
 
 public class AdventD2P1 {
@@ -17,12 +16,9 @@ public class AdventD2P1 {
         ArrayList<String> password = new ArrayList<>();
         File source = new File("inputDay2.txt");
         Scanner scan = new Scanner(source);
-        String re = "";
-        Pattern pt = Pattern.compile(re);
     //Step 1 - Input my Inputs, I think I should use 3 or 4 array lists for this
     //LowerLim<>, UpperLim<>, SpecialChar<>, password<>
     //This will become populate()
-            int i=0;
             while (scan.hasNext()) {
                 String tempString = scan.next();
                 String[] temp1 = tempString.split("-");
@@ -33,7 +29,6 @@ public class AdventD2P1 {
                 specialChar.add(temp1[0].charAt(0));
                 tempString = scan.next();
                 password.add(tempString);
-                i++;
             }
             int correctPasswords = 0;
             for(int ij=0;ij<password.size();ij++){
