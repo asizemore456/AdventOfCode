@@ -37,10 +37,6 @@ public class AdventD2P1 {
             }
             int correctPasswords = 0;
             for(int ij=0;ij<password.size();ij++){
-                String tempString;
-                tempString = password.get(ij);
-                char tempChar = specialChar.get(ij);
-                int characterCount = countChar(tempString,tempChar);
                 if(countChar(password.get(ij), specialChar.get(ij))>upperLim.get(ij)){
                    wrongPasswords++;
                     System.out.println("Upper Lim Violation at index: "+ij+" "+password.get(ij));
@@ -48,7 +44,7 @@ public class AdventD2P1 {
                     System.out.println("Upper Lim Violation:"+upperLim.get(ij));
                     System.out.println("Upper Lim Violation:"+specialChar.get(ij));
                 }
-                else if(characterCount<lowerLim.get(ij)){
+                else if(countChar(password.get(ij), specialChar.get(ij))<lowerLim.get(ij)){
                     wrongPasswords++;
                     System.out.println("Lower Lim Violation at index: "+ij+" "+password.get(ij));
                     System.out.println("Lower Lim Violation:"+lowerLim.get(ij));
