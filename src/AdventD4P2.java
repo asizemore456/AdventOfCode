@@ -81,7 +81,7 @@ public class AdventD4P2 {
                 }
             }
         }
-        if (validChecks == 1) {
+        if (validChecks == 7) {
             return true;
         } else {
             return false;
