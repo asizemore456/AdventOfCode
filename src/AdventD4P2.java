@@ -9,12 +9,19 @@ public class AdventD4P2 {
             Scanner scan = new Scanner(source);
             scan.useDelimiter("\r\n\r\n");
             int validPassports = 0;
+            int g =0;
             while (scan.hasNext()) {
-                if (isValid(parse(scan.next()))) {
+                String passport = scan.next();
+                if (checks(parse(passport))) {
                     validPassports++;
+                    System.out.println("Nice");
                 }
+                else{
+                    System.out.println("This passport is garbage. #: "+g);
+                }
+                g++;
             }
-            System.out.println(validPassports);
+            System.out.println(validPassports+" "+g);
         } catch (FileNotFoundException e) {
             System.out.println("Hmmmm, there's no file here");
             e.getStackTrace();
@@ -24,15 +31,6 @@ public class AdventD4P2 {
     public static String[] parse(String s) {
         String[] fields = s.split("\n| ");
         return fields;
-    }
-
-    public static Boolean isValid(String[] s) {
-        if (checks(s)) {
-            return true;
-        } else {
-            return false;
-        }
-
     }
 
 
@@ -51,31 +49,31 @@ public class AdventD4P2 {
                 } else {
                     System.out.println("Iyr failed");
                 }
-            } else if (s[i].split(":")[0].compareTo("Eyr") == 0) {
+            } else if (s[i].split(":")[0].compareTo("eyr") == 0) {
                 if (validEyr(s, i)) {
                     validChecks++;
                 } else {
                     System.out.println("Eyr failed");
                 }
-            } else if (s[i].split(":")[0].compareTo("Hgt") == 0) {
-                if (validHt(s, i)) {
+            } else if (s[i].split(":")[0].compareTo("hgt") == 0) {
+                if (validHgt(s, i)) {
                     validChecks++;
                 } else {
                     System.out.println("Hgt failed");
                 }
-            } else if (s[i].split(":")[0].compareTo("Hcl") == 0) {
+            } else if (s[i].split(":")[0].compareTo("hcl") == 0) {
                 if (validHcl(s, i)) {
                     validChecks++;
                 } else {
                     System.out.println("Hcl failed");
                 }
-            } else if (s[i].split(":")[0].compareTo("Ecl") == 0) {
+            } else if (s[i].split(":")[0].compareTo("ecl") == 0) {
                 if (validEcl(s, i)) {
                     validChecks++;
                 } else {
                     System.out.println("Ecl failed");
                 }
-            } else if (s[i].split(":")[0].compareTo("Pid") == 0) {
+            } else if (s[i].split(":")[0].compareTo("pid") == 0) {
                 if (validPid(s, i)) {
                     validChecks++;
                 } else {
@@ -124,8 +122,8 @@ public class AdventD4P2 {
 
     public static Boolean validEyr(String[] s, int i) {
         String eyr = s[i].split(":")[1];
-        int Eyr = Integer.parseInt(eyr);
         if (eyr.length() == 4) {
+            int Eyr = Integer.parseInt(eyr);
             if (Eyr < 2020) {
                 return false;
             } else if (Eyr > 2030) {
@@ -138,9 +136,10 @@ public class AdventD4P2 {
         }
     }
 
-    public static Boolean validHt(String[] s, int i) {
+    public static Boolean validHgt(String[] s, int i) {
         String hgt = s[i].split(":")[1];
-        if (hgt.charAt(hgt.length() - 2) == 'c') {
+        Character d = hgt.charAt(hgt.length() - 2);
+        if (d == 'c') {
             int Hgt = Integer.parseInt(hgt.split("c")[0]);
             if (Hgt < 150) {
                 return false;
@@ -149,7 +148,7 @@ public class AdventD4P2 {
             } else {
                 return true;
             }
-        } else if (hgt.charAt(hgt.length() - 2) == 'i') {
+        } else if (d == 'i') {
             int Hgt = Integer.parseInt(hgt.split("i")[0]);
             if (Hgt < 59) {
                 return false;
@@ -169,9 +168,25 @@ public class AdventD4P2 {
             if (hcl.length() == 7) {
                 int count = 0;
                 for (int j = 1; j < 7; j++) {
-                    if (Character.isDigit(hcl.charAt(i))) {
+                    if (hcl.charAt(j)=='a') {
                         count++;
-                    } else if (Character.isLetter(hcl.charAt(i))) {
+                    }
+                    else if(hcl.charAt(j)=='b'){
+                        count++;
+                    }
+                    else if(hcl.charAt(j)=='c'){
+                        count++;
+                    }
+                    else if(hcl.charAt(j)=='d'){
+                        count++;
+                    }
+                    else if(hcl.charAt(j)=='e'){
+                        count++;
+                    }
+                    else if(hcl.charAt(j)=='f'){
+                        count++;
+                    }
+                    else if (Character.isDigit(hcl.charAt(j))) {
                         count++;
                     }
                 }
