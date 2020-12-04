@@ -14,7 +14,7 @@ public class AdventD4P2 {
                 String passport = scan.next();
                 if (checks(parse(passport))) {
                     validPassports++;
-                    System.out.println("Nice");
+                    System.out.println("Nice: "+passport+" :Nice");
                 }
                 else{
                     System.out.println("This passport is garbage. #: "+g);
