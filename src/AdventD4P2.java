@@ -1,27 +1,26 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class AdventD4P2 {
+    static int g;
     public static void main(String[] args) {
         try {
             File source = new File("inputDay4.txt");
             Scanner scan = new Scanner(source);
             scan.useDelimiter("\r\n\r\n");
             int validPassports = 0;
-            int g =0;
+             g = 0;
             while (scan.hasNext()) {
                 String passport = scan.next();
                 if (checks(parse(passport))) {
                     validPassports++;
-                    System.out.println("Nice: "+passport+" :Nice");
-                }
-                else{
-                    System.out.println("This passport is garbage. #: "+g);
+                    System.out.println("Nice: "+ Arrays.toString(parse(passport))+" :Nice");
                 }
                 g++;
             }
-            System.out.println(validPassports+" "+g);
+            System.out.println(validPassports);
         } catch (FileNotFoundException e) {
             System.out.println("Hmmmm, there's no file here");
             e.getStackTrace();
@@ -29,7 +28,7 @@ public class AdventD4P2 {
     }
 
     public static String[] parse(String s) {
-        String[] fields = s.split("\n| ");
+        String[] fields = s.split("\n| |\r\n");
         return fields;
     }
 
@@ -40,44 +39,30 @@ public class AdventD4P2 {
             if (s[i].split(":")[0].compareTo("byr") == 0) {
                 if (validByr(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Byr failed");
                 }
             } else if (s[i].split(":")[0].compareTo("iyr") == 0) {
                 if (validIyr(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Iyr failed");
                 }
             } else if (s[i].split(":")[0].compareTo("eyr") == 0) {
                 if (validEyr(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Eyr failed");
                 }
             } else if (s[i].split(":")[0].compareTo("hgt") == 0) {
                 if (validHgt(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Hgt failed");
                 }
             } else if (s[i].split(":")[0].compareTo("hcl") == 0) {
                 if (validHcl(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Hcl failed");
                 }
             } else if (s[i].split(":")[0].compareTo("ecl") == 0) {
                 if (validEcl(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Ecl failed");
                 }
             } else if (s[i].split(":")[0].compareTo("pid") == 0) {
                 if (validPid(s, i)) {
                     validChecks++;
-                } else {
-                    System.out.println("Pid failed");
                 }
             }
         }
