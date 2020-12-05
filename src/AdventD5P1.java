@@ -5,18 +5,21 @@ import java.util.Scanner;
 public class AdventD5P1 {
     public static void main(String[] args) {
         try {
-            File source = new File("inputDay4.txt");
+            File source = new File("test.txt");
             Scanner scan = new Scanner(source);
-            int highestProduct = 0;
+            int highestID = 0;
             while(scan.hasNext()) {
-                String seat = scan.next();
+                String seat = scan.nextLine();
                 int row = getRow(seat);
                 int column = getColumn(seat);
-                if(row*column>highestProduct){
-                   highestProduct = row*column;
+                System.out.println(row);
+                System.out.println(column);
+                int seatID = (row*8)+column;
+                if(seatID>highestID){
+                   highestID = seatID;
                 }
             }
-            System.out.println(highestProduct);
+            System.out.println(highestID);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -30,7 +33,7 @@ public class AdventD5P1 {
             if(s.charAt(i)=='F'){
                 upperIndex = getMidPoint(lowerIndex,upperIndex);
             }
-            else{
+            else if(s.charAt(i)=='B'){
                 lowerIndex = getMidPoint(lowerIndex, upperIndex);
             }
         }
@@ -38,22 +41,24 @@ public class AdventD5P1 {
     }
 
     public static int getColumn(String s){
-        int upperIndex = 127;
+        int upperIndex = 7;
         int lowerIndex = 0;
         String input = s.substring(7);
+        System.out.println("Column Input: "+input);
         for(int i=0;i<3;i++){
-            if(s.charAt(i)=='F'){
+            if(s.charAt(i)=='L'){
                 upperIndex = getMidPoint(lowerIndex,upperIndex);
             }
-            else{
+            else if(s.charAt(i)=='R'){
                 lowerIndex = getMidPoint(lowerIndex, upperIndex);
             }
+            System.out.println("Upper Index: "+upperIndex+" Lower Index: "+lowerIndex);
         }
         return upperIndex;
     }
 
     public static int getMidPoint(int l, int u){
-        int midPoint = (l+u)/2;
-        return midPoint;
+        System.out.println("Midpoint: "+(l+u)/2);
+        return (l+u)/2;
     }
 }
