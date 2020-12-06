@@ -12,11 +12,11 @@ public class AdventD5P2 {
             ArrayList<Integer> ids = new ArrayList<Integer>();
             File source = new File("inputDay5.txt");
             Scanner scan = new Scanner(source);
-            while(scan.hasNext()) {
+            while (scan.hasNext()) {
                 String seat = scan.nextLine();
                 int row = getRow(seat);
                 int column = getColumn(seat);
-                int seatID = (row*8)+column;
+                int seatID = (row * 8) + column;
                 ids.add(seatID);
             }
             mySeat = getMySeat(ids);
@@ -26,51 +26,49 @@ public class AdventD5P2 {
         }
     }
 
-    public static int getMySeat(ArrayList<Integer> s){
+    public static int getMySeat(ArrayList<Integer> s) {
         Collections.sort(s);
-        for(int i=0;i<s.size();i++){
-            if(i>0&&i<s.size()){
-                int sum = s.get(i)+s.get(i+1)+s.get(i-1);
-                int product = 3*s.get(i);
-                if(sum!=product){
-                    return s.get(i)+1;
+        for (int i = 0; i < s.size(); i++) {
+            if (i > 0 && i < s.size()) {
+                int sum = s.get(i) + s.get(i + 1) + s.get(i - 1);
+                int product = 3 * s.get(i);
+                if (sum != product) {
+                    return s.get(i) + 1;
                 }
             }
         }
         return -666;
     }
 
-    public static int getRow(String s){
+    public static int getRow(String s) {
         int upperIndex = 127;
         int lowerIndex = 0;
-        String input = s.substring(0,7);
-        for(int i=0;i<7;i++){
-            if(input.charAt(i)=='F'){
-                upperIndex = getMidPoint(lowerIndex,upperIndex);
-            }
-            else if(input.charAt(i)=='B'){
+        String input = s.substring(0, 7);
+        for (int i = 0; i < 7; i++) {
+            if (input.charAt(i) == 'F') {
+                upperIndex = getMidPoint(lowerIndex, upperIndex);
+            } else if (input.charAt(i) == 'B') {
                 lowerIndex = getMidPoint(lowerIndex, upperIndex);
             }
         }
         return upperIndex;
     }
 
-    public static int getColumn(String s){
+    public static int getColumn(String s) {
         int upperIndex = 7;
         int lowerIndex = 0;
         String input = s.substring(7);
-        for(int i=0;i<3;i++){
-            if(input.charAt(i)=='L'){
-                upperIndex = getMidPoint(lowerIndex,upperIndex);
-            }
-            else if(input.charAt(i)=='R'){
+        for (int i = 0; i < 3; i++) {
+            if (input.charAt(i) == 'L') {
+                upperIndex = getMidPoint(lowerIndex, upperIndex);
+            } else if (input.charAt(i) == 'R') {
                 lowerIndex = getMidPoint(lowerIndex, upperIndex);
             }
         }
         return upperIndex;
     }
 
-    public static int getMidPoint(int l, int u){
-        return (l+u)/2;
+    public static int getMidPoint(int l, int u) {
+        return (l + u) / 2;
     }
 }
