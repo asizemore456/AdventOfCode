@@ -1,26 +1,43 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-public class AdventD5P1 {
+
+public class AdventD5P2 {
     public static void main(String[] args) {
         try {
+            int mySeat = -666;
+            ArrayList<Integer> ids = new ArrayList<Integer>();
             File source = new File("inputDay5.txt");
             Scanner scan = new Scanner(source);
-            int highestID = 0;
             while(scan.hasNext()) {
                 String seat = scan.nextLine();
                 int row = getRow(seat);
                 int column = getColumn(seat);
                 int seatID = (row*8)+column;
-                if(seatID>highestID){
-                   highestID = seatID;
-                }
+                ids.add(seatID);
             }
-            System.out.println(highestID);
+            mySeat = getMySeat(ids);
+            System.out.println(mySeat);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int getMySeat(ArrayList<Integer> s){
+        Collections.sort(s);
+        for(int i=0;i<s.size();i++){
+            if(i>0&&i<s.size()){
+                int sum = s.get(i)+s.get(i+1)+s.get(i-1);
+                int product = 3*s.get(i);
+                if(sum!=product){
+                    return s.get(i)+1;
+                }
+            }
+        }
+        return -666;
     }
 
     public static int getRow(String s){
