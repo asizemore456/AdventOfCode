@@ -51,7 +51,9 @@ public class AdventD7P1 {
             return new ArrayList<String>();
         }
         String[] temp;
-        temp = s.get(0).split(", |.");
+        temp = s.get(0).split(", ");
+        s.clear();
+        System.out.println("Temp: "+Arrays.toString(temp));
         for (int d = 0; d < temp.length; d++) {
 
             if (temp[d].charAt(0) == ' ') {
@@ -60,9 +62,9 @@ public class AdventD7P1 {
         }
         ArrayList<String> out = new ArrayList<>();
         for (int f = 0; f < temp.length; f++) {
-            if(temp[f].indexOf("bag",0)>0){
-                String a = temp[f].substring(2, temp[f].indexOf("bag",0) - 1);
-                s.add(f,a);
+            if (temp[f].indexOf("bag", 0) > 0) {
+                String a = temp[f].substring(2, temp[f].indexOf("bag", 0) - 1);
+                s.add(f, a);
             }
         }
         System.out.println("S: "+s);
