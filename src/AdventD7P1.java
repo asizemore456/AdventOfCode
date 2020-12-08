@@ -18,15 +18,16 @@ public class AdventD7P1 {
             while (scan.hasNext()) {
                 String rule = scan.next();
                 bags.add(rule.split("contain ")[0]);
-                garbage.add(rule.split("contain")[1]);
+                String myString = rule.split("contain ")[1];
+                System.out.println("My String: "+myString);
+                garbage.add(myString);
+                System.out.println("Garbage Pre-Clean: "+garbage);
                 contents.add(cleanGarbage(garbage));
+                System.out.println("Clean Garbage"+cleanGarbage(garbage));
                 garbage.clear();
             }
             bags = cleanBags(bags);
-            System.out.println("Bags: "+bags);
-            System.out.println("Contents: "+contents);
             for (int i = 0; i < bags.size(); i++) {
-                System.out.println("Contents of i: "+contents.get(i));
                 int indexOfRule = bags.indexOf(contents.get(i));
                 if (canContain(contents.get(i), "shiny gold")) {
                     total++;
@@ -46,8 +47,11 @@ public class AdventD7P1 {
     }
 
     public static ArrayList<String> cleanGarbage(ArrayList<String> s) {
+        if(s.size()==0){
+            return new ArrayList<String>();
+        }
         String[] temp;
-        temp = s.get(0).split(", ");
+        temp = s.get(0).split(", |.");
         for (int d = 0; d < temp.length; d++) {
 
             if (temp[d].charAt(0) == ' ') {
@@ -61,11 +65,8 @@ public class AdventD7P1 {
                 s.add(f,a);
             }
         }
-        out = s;
         System.out.println("S: "+s);
-        System.out.println("Out: "+out);
-        s.clear();
-        return out;
+        return s;
     }
 
     public static Boolean canContain(ArrayList<String> s, String sg) {
