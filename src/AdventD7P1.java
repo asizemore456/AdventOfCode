@@ -22,8 +22,9 @@ public class AdventD7P1 {
                 System.out.println("My String: "+myString);
                 garbage.add(myString);
                 System.out.println("Garbage Pre-Clean: "+garbage);
-                contents.add(cleanGarbage(garbage));
-                System.out.println("Clean Garbage"+cleanGarbage(garbage));
+                ArrayList<String> cleaned = cleanGarbage(garbage);
+                contents.add(cleaned);
+                System.out.println("Clean Garbage"+cleaned);
                 garbage.clear();
             }
             bags = cleanBags(bags);
