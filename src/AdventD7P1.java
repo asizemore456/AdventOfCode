@@ -20,6 +20,7 @@ public class AdventD7P1 {
                 bags.add(rule.split("contain ")[0]);
                 garbage.add(rule.split("contain")[1]);
                 contents.add(cleanGarbage(garbage));
+                garbage.clear();
             }
             bags = cleanBags(bags);
             System.out.println("Bags: "+bags);
@@ -57,7 +58,6 @@ public class AdventD7P1 {
         for (int f = 0; f < temp.length; f++) {
             if(temp[f].indexOf("bag",0)>0){
                 String a = temp[f].substring(2, temp[f].indexOf("bag",0) - 1);
-                s.remove(f);
                 s.add(f,a);
             }
         }
