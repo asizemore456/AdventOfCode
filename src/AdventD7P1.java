@@ -24,10 +24,12 @@ public class AdventD7P1 {
                 System.out.println("Garbage Pre-Clean: "+garbage);
                 ArrayList<String> cleaned = cleanGarbage(garbage);
                 contents.add(cleaned);
+                System.out.println("Current Contents: "+contents);
                 System.out.println("Clean Garbage"+cleaned);
                 garbage.clear();
             }
             bags = cleanBags(bags);
+            System.out.println("Contents: "+contents.get(0));
             for (int i = 0; i < bags.size(); i++) {
                 int indexOfRule = bags.indexOf(contents.get(i));
                 if (canContain(contents.get(i), "shiny gold")) {
