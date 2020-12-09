@@ -8,7 +8,7 @@ public class AdventD7P1Mk2 {
             File source = new File("inputDay7.txt");
             Scanner scan = new Scanner(source);
             scan.useDelimiter("\r\n");
-            ArrayList<Bag> myBags = new ArrayList<>();
+            HashMap<String, Bag> myBags = new HashMap<>(); ;
             while(scan.hasNext()){
                 String rule = scan.next();
                 String name = rule.split(" bags contain ")[0];
@@ -19,28 +19,39 @@ public class AdventD7P1Mk2 {
                 ArrayList<String> contents = cleanGarbage(tempArrayList);
                 System.out.println(contents);
                 Bag tempBag = new Bag(name, contents);
-                myBags.add(tempBag);
+                myBags.put(tempBag.getBagName(),tempBag);
             }
             //myBags has all the bags in it now
-            Set<Bag> carriers = new HashSet();
-            for(Bag bag:myBags){
-                if(bag.canContain("shiny gold")){
-                    carriers.add(bag);
+            Bag shinyGoldBag = new Bag("shiny gold");
+            int counter = 0;
+            for( String name:myBags.keySet()) {
+                if(canContain(myBags,myBags.get(name), shinyGoldBag)){
+                    counter++;
                 }
             }
-            for(Bag gen1:carriers){
-                String name = gen1.getBagName();
-                for(Bag bag:myBags){
-                    if(bag.canContain(name)){
-                        carriers.add(bag);
-                    }
-                }
-            }
-            System.out.println(carriers.size());
+            System.out.println(counter);
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }
     }
+
+    public static boolean canContain(HashMap<String,Bag> map,Bag lookIn,Bag lookFor){
+        if(lookIn.canContain(lookFor.getBagName())){
+            return true;
+        }
+        else{
+            for(int i = 0;i<lookIn.getContents().size();i++){
+                String bagName = lookIn.getContents().get(i);
+                Bag thisBag = map.get(bagName);
+                if(canContain(map,thisBag,lookFor)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 
     public static ArrayList<String> cleanGarbage(ArrayList<String> s) {
         if(s.size()==0){

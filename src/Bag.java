@@ -6,7 +6,17 @@ public class Bag {
 
     public Bag(String name, ArrayList<String> cont){
         bagName = name;
-        contents = cont;
+        if(cont.get(0).equals(" other")){
+            contents = new ArrayList<>();
+        }
+        else{
+            contents = cont;
+        }
+    }
+
+    public Bag(String s){
+        bagName = s;
+        contents = new ArrayList<>();
     }
 
     public Bag(){
