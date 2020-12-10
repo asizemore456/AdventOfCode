@@ -3,13 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class AdventD7P1Mk2 {
-    public static void main(String[] args){
-        try{
+    public static void main(String[] args) {
+        try {
             File source = new File("inputDay7.txt");
             Scanner scan = new Scanner(source);
             scan.useDelimiter("\r\n");
-            HashMap<String, Bag> myBags = new HashMap<>(); ;
-            while(scan.hasNext()){
+            HashMap<String, Bag> myBags = new HashMap<>();
+            ;
+            while (scan.hasNext()) {
                 String rule = scan.next();
                 String name = rule.split(" bags contain ")[0];
                 System.out.println(name);
@@ -19,31 +20,30 @@ public class AdventD7P1Mk2 {
                 ArrayList<String> contents = cleanGarbage(tempArrayList);
                 System.out.println(contents);
                 Bag tempBag = new Bag(name, contents);
-                myBags.put(tempBag.getBagName(),tempBag);
+                myBags.put(tempBag.getBagName(), tempBag);
             }
             //myBags has all the bags in it now
             Bag shinyGoldBag = new Bag("shiny gold");
             int counter = 0;
-            for( String name:myBags.keySet()) {
-                if(canContain(myBags,myBags.get(name), shinyGoldBag)){
+            for (String name : myBags.keySet()) {
+                if (canContain(myBags, myBags.get(name), shinyGoldBag)) {
                     counter++;
                 }
             }
             System.out.println(counter);
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean canContain(HashMap<String,Bag> map,Bag lookIn,Bag lookFor){
-        if(lookIn.canContain(lookFor.getBagName())){
+    public static boolean canContain(HashMap<String, Bag> map, Bag lookIn, Bag lookFor) {
+        if (lookIn.canContain(lookFor.getBagName())) {
             return true;
-        }
-        else{
-            for(int i = 0;i<lookIn.getContents().size();i++){
+        } else {
+            for (int i = 0; i < lookIn.getContents().size(); i++) {
                 String bagName = lookIn.getContents().get(i);
                 Bag thisBag = map.get(bagName);
-                if(canContain(map,thisBag,lookFor)){
+                if (canContain(map, thisBag, lookFor)) {
                     return true;
                 }
             }
@@ -52,9 +52,8 @@ public class AdventD7P1Mk2 {
     }
 
 
-
     public static ArrayList<String> cleanGarbage(ArrayList<String> s) {
-        if(s.size()==0){
+        if (s.size() == 0) {
             return new ArrayList<String>();
         }
         String[] temp;
