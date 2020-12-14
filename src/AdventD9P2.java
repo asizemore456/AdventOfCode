@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdventD9P1 {
+public class AdventD9P2 {
     public static void main(String[] args) {
         try {
             File source = new File("inputDay9.txt");
@@ -14,12 +14,20 @@ public class AdventD9P1 {
                 inputArrayL.add(value);
             }
             scan.close();
-            for (int i = 25; i < inputArrayL.size(); i++) {
-                if (sumOf25(inputArrayL, i)) {
-                    System.out.println(inputArrayL.get(i));
-                } else {
-                    System.out.println("First Fail: " + inputArrayL.get(i));
-                    return;
+            for (int i = 0; i < inputArrayL.size(); i++) {
+                long sum = 0;
+                long min = Long.MAX_VALUE;
+                long max = Long.MIN_VALUE;
+                long answer = 0;
+                long bigSum = 69316178;
+                for (int j = i; j < inputArrayL.size(); j++) {
+                    min = Math.min(min,inputArrayL.get(j));
+                    max = Math.max(max,inputArrayL.get(j));
+                    sum += inputArrayL.get(j);
+                    if (sum == bigSum) {
+                        answer = min + max;
+                        System.out.println(answer);
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
